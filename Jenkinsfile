@@ -6,7 +6,7 @@ pipeline {
         IMAGE_NAME         = 'nestly'
         IMAGE_TAG          = "${env.BUILD_NUMBER}"
         FULL_IMAGE         = "${DOCKERHUB_USERNAME}/${IMAGE_NAME}:${IMAGE_TAG}"
-        SONAR_ORG = 'flask-devops-demo'
+        SONAR_ORG = 'nestly'
         SONAR_PROJECT = 'skbablualam_nestly'
     }
 
