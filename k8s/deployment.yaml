@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nestly-deployment
+  labels:
+    app: nestly
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: nestly
+  template:
+    metadata:
+      labels:
+        app: nestly
+    spec:
+      containers:
+        - name: nestly
+          # Replace YOUR_DOCKERHUB_USERNAME with your actual Docker Hub username
+          image: skbablualam03031997/nestly:latest
+          ports:
+            - containerPort: 3000
+          readinessProbe:
+            httpGet:
+              path: /healthz
+              port: 3000
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: 3000
+            initialDelaySeconds: 10
+            periodSeconds: 15
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "128Mi"
+            limits:
+              cpu: "250m"
+              memory: "256Mi"
