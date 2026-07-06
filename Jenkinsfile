@@ -27,14 +27,14 @@ pipeline {
 
         stage('SonarQube Code Analysis') {
             steps {
-                withSonarQubeEnv('SonarCloud') {
-                    // This tells Jenkins to use the tool you just configured in the UI
+                // Change this string to match your Jenkins UI exactly
+                withSonarQubeEnv('MySonar') { 
                     tool name: 'SonarQubeScanner', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
                     
                     sh '''
                     sonar-scanner \
-                      -Dsonar.projectKey=YOUR_SONARCLOUD_PROJECT_KEY \
-                      -Dsonar.organization=YOUR_SONARCLOUD_ORG_KEY \
+                      -Dsonar.projectKey=${SONAR_PROJECT} \
+                      -Dsonar.organization=${SONAR_ORG} \
                       -Dsonar.sources=.
                     '''
                 }
