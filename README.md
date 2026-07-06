@@ -139,3 +139,16 @@ nestly/
 ```
 
 ```
+## Project Screenshots:
+
+### CICD Pipeline
+![alt text](<Screenshot 1948-04-15 at 3.37.33 PM.png>)
+
+### Website 
+
+![alt text](<Screenshot 1948-04-15 at 3.39.32 PM.png>)
+
+### Random
+![alt text](<Screenshot 1948-04-15 at 3.38.12 PM.png>)
+
+![alt text](<Screenshot 1948-04-15 at 3.40.22 PM.png>)
