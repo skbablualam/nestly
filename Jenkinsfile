@@ -18,7 +18,7 @@ pipeline {
         stage('Unit Tests') {
             steps {
                 // Assumes Node.js environment. Make sure you have a "test" script in package.json
-                sh 'npm install'
+                // sh 'npm install'
                 // sh 'npm test' 
             }
         }
