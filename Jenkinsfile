@@ -15,16 +15,38 @@ pipeline {
             }
         }
 
+        stage('Unit Tests') {
+            steps {
+                // Assumes Node.js environment. Make sure you have a "test" script in package.json
+                sh 'npm install'
+                sh 'npm test' 
+            }
+        }
+
+        stage('SonarQube Code Analysis') {
+            steps {
+                // Assumes you have configured a SonarQube server in Jenkins named 'SonarQube-Server'
+                withSonarQubeEnv('SonarQube-Server') {
+                    sh 'sonar-scanner -Dsonar.projectKey=nestly -Dsonar.sources=.'
+                }
+            }
+        }
+
         stage('Build Docker Image') {
             steps {
                 sh "docker build -t ${FULL_IMAGE} -t ${DOCKERHUB_USERNAME}/${IMAGE_NAME}:latest ."
             }
         }
 
+        stage('Trivy Image Scanning') {
+            steps {
+                // Scans the local image for High and Critical vulnerabilities before pushing
+                sh "trivy image --severity HIGH,CRITICAL ${FULL_IMAGE}"
+            }
+        }
+
         stage('Push to Docker Hub') {
             steps {
-                // Create this credential in Jenkins: Manage Jenkins > Credentials
-                // Kind: Username with password, ID: dockerhub-creds
                 withCredentials([usernamePassword(
                     credentialsId: 'dockerhub-creds',
                     usernameVariable: 'DOCKER_USER',
@@ -39,7 +61,6 @@ pipeline {
 
         stage('Deploy to Minikube') {
             steps {
-                // Assumes Jenkins agent has kubectl configured against your Minikube cluster
                 sh """
                     sed -i "s|${DOCKERHUB_USERNAME}/${IMAGE_NAME}:latest|${FULL_IMAGE}|g" k8s/deployment.yaml
                     kubectl apply -f k8s/deployment.yaml
@@ -55,10 +76,15 @@ pipeline {
             sh 'docker logout'
         }
         success {
+            sh '''
+            echo "========== Pipeline Execution Successful =========="
+            '''
             echo "Deployed ${FULL_IMAGE} to Minikube."
         }
         failure {
-            echo "Pipeline failed — check the stage logs above."
+            sh '''
+            echo "========== Pipeline Execution Failed =========="
+            '''
         }
     }
 }
