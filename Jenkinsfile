@@ -7,7 +7,7 @@ pipeline {
         IMAGE_TAG          = "${env.BUILD_NUMBER}"
         FULL_IMAGE         = "${DOCKERHUB_USERNAME}/${IMAGE_NAME}:${IMAGE_TAG}"
         SONAR_ORG = 'skbablualam03031997/nestly'
-        SONAR_PROJECT = 'skbablualam03031997/nestly:latest'
+        SONAR_PROJECT = 'skbablualam03031997/nestly'
     }
 
     stages {
