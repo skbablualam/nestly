@@ -26,17 +26,19 @@ pipeline {
         }
 
         stage('SonarQube Code Analysis') {
+            environment {
+                // This grabs the installation path and saves it to SCANNER_HOME
+                SCANNER_HOME = tool name: 'SonarQubeScanner', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
+            }
             steps {
-                // Change this string to match your Jenkins UI exactly
-                withSonarQubeEnv('MySonar') { 
-                    tool name: 'SonarQubeScanner', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
-                    
-                    sh '''
-                    sonar-scanner \
+                withSonarQubeEnv('MySonar') {
+                    // Note the triple double-quotes """ and the ${SCANNER_HOME}/bin/ path!
+                    sh """
+                    ${SCANNER_HOME}/bin/sonar-scanner \
                       -Dsonar.projectKey=${SONAR_PROJECT} \
                       -Dsonar.organization=${SONAR_ORG} \
                       -Dsonar.sources=.
-                    '''
+                    """
                 }
             }
         }
