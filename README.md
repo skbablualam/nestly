@@ -366,38 +366,26 @@ Password : prom-operator
 # 📸 Project Screenshots
 
 ## 🚀 Jenkins CI/CD Pipeline
-
-> Add Screenshot Here
 ![alt text](<Screenshot 1948-04-16 at 12.09.39 AM.png>)
 ---
 
 ## 🏡 Nestly Website
-
-> Add Screenshot Here
 ![alt text](<Screenshot 1948-04-15 at 3.39.32 PM-1.png>)
 ---
 
 ## ☸️ Kubernetes Deployment
-
-> Add Screenshot Here
 ![alt text](<Screenshot 1948-04-16 at 12.04.15 AM.png>)
 ---
 
 ## 🔒 Trivy Security Scan
-
-> Add Screenshot Here
 ![alt text](<Screenshot 1948-04-15 at 9.26.38 PM.png>)
 ---
 
 ## 📈 SonarCloud Analysis
-
-> Add Screenshot Here
 ![alt text](<Screenshot 1948-04-15 at 11.10.33 PM.png>)
 ---
 
 ## 📊 Grafana Dashboard
-
-> Add Screenshot Here
 ![alt text](<Screenshot 1948-04-15 at 9.22.08 PM.png>)
 ---
 
