@@ -364,6 +364,7 @@ Password : prom-operator
 ---
 
 # 📸 Project Screenshots
+![alt text](f4131f68-d8d0-47df-94ce-818286ec3f23.png)
 
 ## 🚀 Jenkins CI/CD Pipeline
 ![alt text](<Screenshot 1948-04-16 at 12.09.39 AM.png>)
